@@ -1,0 +1,197 @@
+:root {
+  --ff-sans: "Poppins", sans-serif;
+
+  --fw-light: 200;
+  --fw-normal: 400;
+  --fw-bold: 600;
+
+  --fs-400: 0.9275rem; /* font-size 5px/16 = 0.9275rem (for responsiveness) */
+  --fs-500: 1.25rem; /* eyeballing */
+  --fs-600: 1.625rem; /* eyeballing */
+  --fs-900: 2.5rem; /* eyeballing */
+
+  --clr-neutral-900: hsl(234, 12%, 34%);
+  --clr-neutral-400: hsl(229, 6%, 66%);
+  --clr-neutral-100: hsl(0, 0%, 98%);
+
+  --clr-teal: hsl(180, 58%, 56%);
+  --clr-red: hsl(0, 70%, 60%);
+  --clr-blue: hsl(212, 75%, 62%);
+  --clr-yellow: hsl(34, 89%, 65%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+
+Usually, resetting margin and padding as well as preventing large images from weird behavior is needed but it depends on the project (not in this test project).
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+} 
+
+*/
+
+html {
+  /* Font related properties */
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-normal);
+  line-height: 1.7;
+  color: var(--clr-neutral-400);
+}
+
+body {
+  margin: 0; /* resetting margin */
+  padding-block-end: 5rem; /* added space at the bottom */
+}
+
+h1,
+h2,
+h3 {
+  color: var(--clr-neutral-900);
+  line-height: 1.2; /* Vertical space between lines of text */
+}
+
+.wrapper {
+  /* Should come before .wrapper--narrow to be overwritten because of class="wrapper wrapper--narrow" */
+  padding-inline: 2rem;
+  max-width: 1280px;
+  margin-inline: auto; /* margin for left and right */
+}
+
+.wrapper--narrow {
+  max-width: 550px;
+}
+
+header {
+  text-align: center;
+  margin-block: 6rem; /* margin for top and bottom */
+}
+
+h1 {
+  font-weight: var(--fw-light);
+  font-size: var(--fs-900);
+}
+
+h1 span {
+  font-weight: var(--fw-bold);
+}
+
+header > p {
+  font-size: var(--fs-500);
+}
+
+/* Using flexbox */
+/* .layout-grid {
+  --gap: 2rem;
+
+  display: flex;
+  gap: var(--gap);
+}
+
+@media (max-width: 800px) {
+  .layout-grid {
+    flex-direction: column;
+  }
+} */
+
+/* Using grid */
+.layout-grid {
+  --gap: 2rem;
+
+  display: grid;
+  grid-auto-columns: 1fr;
+  gap: var(--gap);
+
+  grid-template-areas:
+    "one"
+    "two"
+    "three"
+    "four";
+}
+
+@media (min-width: 800px) {
+  .layout-grid {
+    grid-template-areas:
+      "... two   ...."
+      "one two   four"
+      "one three four"
+      "... three ....";
+  }
+}
+
+.layout-grid > * {
+  flex: 1;
+}
+
+/* Using flexbox on .layout-grid */
+/* This is to declare that .col is using grid */
+/* .col {
+  display: grid; 
+  align-content: center;
+  gap: var(--gap);
+} */
+/* Using flexbox on .layout-grid */
+
+.card {
+  --br: 0.325rem;
+  padding: 2rem;
+  border-top: var(--br) solid;
+  border-radius: var(--br);
+  box-shadow: 0 0.5rem 1.5rem -0.5rem rgb(0 50 100 / 0.15);
+}
+
+/* Using grid on .layout-grid */
+.card:nth-child(1) {
+  grid-area: one;
+}
+
+.card:nth-child(2) {
+  grid-area: two;
+}
+
+.card:nth-child(3) {
+  grid-area: three;
+}
+
+.card:nth-child(4) {
+  grid-area: four;
+}
+/* Using grid on .layout-grid */
+
+.card__title {
+  font-size: var(--fs-600);
+  margin: 0;
+}
+
+.card__img {
+  display: block;
+  margin-left: auto;
+  margin-top: 1rem;
+}
+
+.border-teal {
+  border-color: var(--clr-teal);
+}
+
+.border-blue {
+  border-color: var(--clr-blue);
+}
+
+.border-red {
+  border-color: var(--clr-red);
+}
+
+.border-yellow {
+  border-color: var(--clr-yellow);
+}
